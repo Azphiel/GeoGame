@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title>Nowa sesja</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-grid >
+    <ion-item>
+      <ion-label position="stacked" color="primary">Nazwa</ion-label>
+      <ion-input id="name"  (input)="onGetName($event)"   type="text" spellcheck="false"
+        required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Wysokość</ion-label>
+      <ion-input id="latitude"  (input)="onGetLat($event)"   type="text" spellcheck="false"
+        required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Szerokość</ion-label>
+      <ion-input id="longitude"  (input)="onGetLong($event)"   type="text" spellcheck="false"
+        required>
+      </ion-input>
+    </ion-item>
+    <ion-row style="text-align-last:center;">
+      <ion-col text-center>
+        <ion-button (click)="addSession()" color="primary">Utwórz</ion-button>
+      </ion-col>
+      <ion-col text-center>
+        <ion-button (click)="closeModal()" color="danger">Anuluj</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
