@@ -25,11 +25,39 @@ namespace GeoGame.Repositories
         public async Task<IEnumerable<JsonWrapQuestion>> GetQuestions()
         {
             List<JsonWrapQuestion> JsonWrapitems = new List<JsonWrapQuestion>();
-            var questions = _context.Questions.Include(x=>x.QuestionAnswers).ThenInclude(x=>x.Answer).Include(x=>x.QuestionLocalizations).ThenInclude(x=>x.Location);
-            foreach(var question in questions)
+            var questions = _context.Questions;
+            List<QuestionModel> q = new List<QuestionModel>();
+            foreach (var question in questions)
             {
-                JsonWrapitems.Add(new JsonWrapQuestion() { Questions = question });
+                q.Add(new QuestionModel(question));
+
             }
+            if (q.Any())
+            {
+                foreach (var item in q)
+                {
+                    var answers = _context.Questions.Where(x => x.Id == item.Id).SelectMany(i => i.Answers);
+                    if (answers.Any())
+                    {
+                        foreach (var a in answers)
+                        {
+                            item.Answers.Add(new AnswerModel(a));
+                        }
+                    }
+
+
+                    var loc = _context.Questions.Where(x => x.Id == item.Id).SelectMany(i => i.Locations);
+                    if (loc.Any())
+                    {
+                        foreach (var l in loc)
+                        {
+                            item.Location.Add(new LocationModel(l));
+                        }
+                    }
+                }
+            }
+  
+            JsonWrapitems.Add(new JsonWrapQuestion() { Questions = q });
             return JsonWrapitems;
 
         }

@@ -9,6 +9,7 @@ namespace GeoGame.Modules
     {
         public string Id { get; set; }
         public string Answer { get; set; }
+        public bool True { get; set; }
         public virtual ICollection<Questions> Questions { get; set; }
         public virtual List<QuestionAnswer> QuestionAnswers { get; set; }
     }
@@ -23,11 +24,13 @@ namespace GeoGame.Modules
         {
             Id = dbAnswers.Id;
             Answer = dbAnswers.Answer;
+            True = dbAnswers.True;
             Questions = new List<QuestionModel>();
         }
 
         public string Id { get; set; }
         public string Answer { get; set; }
+        public bool True { get; set; }
         public ICollection<QuestionModel> Questions { get; set; }
     }
 }

@@ -2,13 +2,12 @@ using GeoGame.Modules;
 using GeoGame.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace GeoGame
 {
@@ -33,7 +32,8 @@ namespace GeoGame
               options.UseSqlServer(Configuration["ConnectionString"]));
 
             services.AddScoped<IQuestionRepository, QuestionRepository>();
-
+            //services.AddControllers().AddJsonOptions(x =>
+            //    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
             services.AddControllersWithViews().AddJsonOptions(option =>
             {
